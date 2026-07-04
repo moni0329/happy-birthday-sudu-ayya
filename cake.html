@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Birthday Cake - Sudu Ayya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:Poppins,sans-serif;background:linear-gradient(#061B3A,#08244d);overflow:hidden;color:#fff}
+.stars{position:fixed;inset:0;background-image:radial-gradient(#fff 1px,transparent 1px);background-size:40px 40px;opacity:.3}
+.container{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:20px;position:relative;z-index:2}
+h1{font-family:"Great Vibes",cursive;font-size:68px;color:#FFD369;margin:0}
+p{max-width:700px;text-align:center}
+.cake{margin:40px 0;position:relative}
+.layer{width:320px;height:70px;background:#ffd369;border-radius:10px;margin:auto;position:relative;box-shadow:0 8px 20px rgba(0,0,0,.3)}
+.layer:before{content:"";position:absolute;left:0;right:0;top:0;height:18px;background:#fff;border-radius:10px 10px 0 0}
+.layer.mid{width:240px}
+.layer.top{width:160px}
+.candles{display:flex;justify-content:center;gap:4px;margin-bottom:8px;flex-wrap:wrap;width:180px;margin-left:auto;margin-right:auto}
+.candle{width:6px;height:24px;background:#fff;position:relative}
+.flame{position:absolute;width:8px;height:10px;background:gold;border-radius:50% 50% 50% 50%;top:-10px;left:-1px;box-shadow:0 0 10px orange}
+button{padding:14px 28px;border:none;border-radius:30px;background:#ff4f91;color:#fff;font-size:17px;cursor:pointer;margin:8px}
+#message{display:none;margin-top:20px;background:rgba(255,255,255,.08);padding:20px;border-radius:15px;max-width:750px}
+.fx{position:fixed;pointer-events:none;font-size:24px;animation:rise 2.5s linear forwards}
+@keyframes rise{to{transform:translate(var(--dx),-500px) rotate(360deg);opacity:0}}
+</style>
+</head>
+<body>
+<div class="stars"></div>
+<div class="container">
+<h1>Happy 28th Birthday<br>Sudu Ayya ❤️</h1>
+<p>Make a wish... then blow out all 28 candles.</p>
+
+<div class="cake">
+<div class="candles" id="candles"></div>
+<div class="layer top"></div>
+<div class="layer mid"></div>
+<div class="layer"></div>
+</div>
+
+<div>
+<button id="blow">💨 Blow the Candles</button>
+<button id="gift">🎁 Open My Gift</button>
+</div>
+
+<div id="message">
+<h2>To My Sudu Ayya ❤️</h2>
+<p>Every birthday with you has become one of my favorite memories. Thank you for being my best friend, my greatest comfort, and the love of my life. I hope we celebrate countless more birthdays together.</p>
+<p>And today, I also want to thank your mother and father for bringing such a wonderful person into this world.</p>
+<p><strong>Forever Yours,<br>Chuti ❤️</strong></p>
+</div>
+</div>
+
+<script>
+const holder=document.getElementById('candles');
+for(let i=0;i<28;i++){
+ const c=document.createElement('div');
+ c.className='candle';
+ const f=document.createElement('div');
+ f.className='flame';
+ c.appendChild(f);
+ holder.appendChild(c);
+}
+function burst(sym,count){
+ for(let i=0;i<count;i++){
+  setTimeout(()=>{
+   const e=document.createElement('div');
+   e.className='fx';
+   e.textContent=sym;
+   e.style.left=Math.random()*innerWidth+'px';
+   e.style.top=innerHeight+'px';
+   e.style.setProperty('--dx',(Math.random()*300-150)+'px');
+   document.body.appendChild(e);
+   setTimeout(()=>e.remove(),2500);
+  },i*20);
+ }
+}
+document.getElementById('blow').onclick=()=>{
+ document.querySelectorAll('.flame').forEach(f=>f.style.display='none');
+ burst('🎆',80);burst('🎉',80);burst('❤️',60);
+};
+document.getElementById('gift').onclick=()=>{
+ document.getElementById('message').style.display='block';
+ burst('💋',50);
+};
+</script>
+</body>
+</html>
